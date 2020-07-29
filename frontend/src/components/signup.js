@@ -7,6 +7,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import {withRouter} from 'react-router';
 
 class Signup extends React.Component {
 
@@ -41,7 +42,9 @@ onSubmit = (e) => {
   };
   fetch("http://localhost:4000/api/auth/signup", requestOptions)
     .then(response => response.json())
-    .then(result => console.log(result))
+    .then(result => {
+      this.props.history.push('/homepage/user')
+    })
     .catch(error => console.log('error', error));
 }
 
@@ -65,10 +68,9 @@ onSubmit = (e) => {
           <Button variant="primary">Cancel</Button>
         </Link>
       </Jumbotron>
-      {console.log(this.state)}
     </div>
   );
 }
 }
 
-export default Signup;
+export default withRouter(Signup)

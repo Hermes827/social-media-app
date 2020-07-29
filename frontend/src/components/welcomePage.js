@@ -8,7 +8,7 @@ import {
   Link
 } from "react-router-dom";
 
-class WelcomePage extends React.Component {
+class Welcomepage extends React.Component {
 
   constructor(){
     super()
@@ -37,4 +37,4 @@ class WelcomePage extends React.Component {
 }
 }
 
-export default WelcomePage;
+export default Welcomepage;

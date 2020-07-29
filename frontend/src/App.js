@@ -5,7 +5,9 @@ import Button from 'react-bootstrap/Button';
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Login from './components/login.js'
 import Signup from './components/signup.js'
-import WelcomePage from './components/welcomePage.js'
+import Welcomepage from './components/welcomepage.js'
+import Homepage from './components/homepage.js'
+import Userpage from './components/userpage.js'
 import {
   BrowserRouter as Router,
   Switch,
@@ -28,13 +30,19 @@ class App extends React.Component {
       <Router>
       <Switch>
         <Route exact path="/">
-          <WelcomePage/>
+          <Welcomepage/>
         </Route>
          <Route path="/login">
            <Login/>
          </Route>
          <Route path="/signup">
            <Signup/>
+         </Route>
+         <Route path="/homepage">
+           <Homepage/>
+             <Route path="/homepage/user">
+               <Userpage/>
+             </Route>
          </Route>
        </Switch>
       </Router>
