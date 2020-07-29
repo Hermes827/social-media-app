@@ -13,9 +13,37 @@ class Signup extends React.Component {
   constructor(){
     super()
     this.state = {
-
+      name: "",
+     email: "",
+     password: "",
+     username: ""
     }
   }
+
+  captureText = (e) => {
+  console.log(e.target.value)
+  this.setState({
+    [e.target.name]: e.target.value
+  })
+  console.log(e.target.name)
+}
+
+onSubmit = (e) => {
+  e.preventDefault()
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  var raw = JSON.stringify({"name": this.state.name, "email": this.state.email, "username": this.state.username, "password": this.state.password});
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+  fetch("http://localhost:4000/api/auth/signup", requestOptions)
+    .then(response => response.json())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+}
 
   render(){
   return (
@@ -23,18 +51,21 @@ class Signup extends React.Component {
       <Jumbotron className="jumbotron">
       <h1>Signup</h1>
       <form>
+        <label>Name:</label>
+        <input type="text" name="name" placeholder="name" onChange={this.captureText}></input><br/>
         <label>Email:</label>
-        <input></input><br/>
+        <input type="text" name="email" placeholder="email" onChange={this.captureText}></input><br/>
         <label>Username:</label>
-        <input></input><br/>
+        <input type="text" name="username" placeholder="username" onChange={this.captureText}></input><br/>
         <label>Password:</label>
-        <input></input><br/>
+        <input type="password" name="password" placeholder="password" onChange={this.captureText}></input><br/>
       </form>
-      <Button variant="primary">Sign up</Button>
+      <Button variant="primary" onClick={this.onSubmit}>Sign up</Button>
         <Link to="/">
           <Button variant="primary">Cancel</Button>
         </Link>
       </Jumbotron>
+      {console.log(this.state)}
     </div>
   );
 }

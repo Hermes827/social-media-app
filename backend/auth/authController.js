@@ -8,6 +8,8 @@ var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 var config = require('../config');
 var VerifyToken = require('./VerifyToken');
+var cors = require('cors')
+router.use(cors());
 
 router.post('/signup', function(req, res) {
   var hashedPassword = bcrypt.hashSync(req.body.password, 8);
