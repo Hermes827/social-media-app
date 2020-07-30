@@ -43,6 +43,7 @@ onSubmit = (e) => {
   fetch("http://localhost:4000/api/auth/signup", requestOptions)
     .then(response => response.json())
     .then(result => {
+      if(result.token){localStorage.token = result.token}
       this.props.history.push('/homepage/user')
     })
     .catch(error => console.log('error', error));

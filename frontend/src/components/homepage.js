@@ -7,6 +7,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import {withRouter} from 'react-router';
 
 class Homepage extends React.Component {
 
@@ -15,16 +16,30 @@ class Homepage extends React.Component {
 
   }
 
+  logout = () => {
+    delete localStorage.token
+    this.props.history.push('/')
+  }
+
+  hasToken(){
+    if(!localStorage.token){
+      this.props.history.push('/')
+    } else {
+      console.log(localStorage)
+    }
+  }
+
   render(){
   return (
     <div className="homepage">
-    <Button>search</Button>
-    <Button>Edit profile</Button>
-    <Button>Settings</Button>
-    <Button>Log out</Button>
+    <Button className="homepageButtons">search</Button>
+    <Button className="homepageButtons">Edit profile</Button>
+    <Button className="homepageButtons">Settings</Button>
+    <Button className="homepageButtons" onClick={this.logout}>Log out</Button>
+    {this.hasToken()}
     </div>
   );
 }
 }
 
-export default Homepage;
+export default withRouter(Homepage);

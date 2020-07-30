@@ -7,6 +7,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import {withRouter} from 'react-router';
 
 class Login extends React.Component {
 
@@ -38,7 +39,10 @@ onSubmit = (e) => {
   };
   fetch("http://localhost:4000/api/auth/login", requestOptions)
     .then(response => response.json())
-    .then(result => console.log(result))
+    .then(result => {
+      if(result.token){localStorage.token = result.token}
+      this.props.history.push('/homepage/user')
+    })
     .catch(error => console.log('error', error));
 }
 
@@ -63,4 +67,4 @@ onSubmit = (e) => {
 }
 }
 
-export default Login;
+export default withRouter(Login)

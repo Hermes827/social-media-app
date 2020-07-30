@@ -7,6 +7,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import Livefeed from './livefeed.js'
 
 class Userpage extends React.Component {
 
@@ -18,7 +19,7 @@ class Userpage extends React.Component {
   render(){
   return (
     <div className="userpage">
-      hello
+      <Livefeed/>
     </div>
   );
 }
