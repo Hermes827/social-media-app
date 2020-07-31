@@ -55,6 +55,7 @@
   border-width: medium;
   border-color: green;
   background-color: grey;
+  overflow: scroll;
 }
 
 .homepage {
@@ -66,9 +67,9 @@
 
 .livefeed {
   height: 10em;
-  width: 50%;
-  margin-top: 10em;
-  margin-left: 15em;
+  width: 70%;
+  margin-top: 1em;
+  margin-left: 7em;
   border-style: solid;
   border-width: medium;
   border-color: green;
@@ -83,4 +84,5 @@
   border-style: solid;
   border-width: medium;
   border-color: black;
+  background-color: orange;
 }

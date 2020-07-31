@@ -10,11 +10,13 @@ var config = require('../config');
 var cors = require('cors')
 router.use(cors());
 
-router.post('/', function (req, res) {
-  console.log(req.params)
+router.post('/', VerifyToken, function (req, res) {
+
     Update.create({
             title: req.body.title,
-            content: req.body.content
+            content: req.body.content,
+            date: req.body.date,
+            authorID: req.body.authorID
         },
         function (err, update) {
             if (err) return res.status(500).send("There was a problem adding the information to the database.");
@@ -27,6 +29,13 @@ router.get('/', function (req, res) {
         if (err) return res.status(500).send("There was a problem finding the users.");
         res.status(200).send(updates);
         console.log(updates)
+    });
+});
+
+router.delete('/:id', function (req, res) {
+    Update.findByIdAndRemove(req.params.id, function (err, update) {
+        if (err) return res.status(500).send("There was a problem deleting the user.");
+        res.status(200).send("update: "+ update.title +" was deleted.");
     });
 });
 

@@ -57,8 +57,8 @@ router.post('/login', function(req, res) {
       expiresIn: 86400 // expires in 24 hours
     });
 
-    console.log(token)
-    res.status(200).send({ auth: true, token: token});
+    console.log(user._id)
+    res.status(200).send({ auth: true, token: token, id: user._id});
   });
 
 });

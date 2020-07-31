@@ -38,6 +38,7 @@ onSubmit = (e) => {
     .then(response => response.json())
     .then(result => {
       if(result.token){localStorage.token = result.token}
+      if(result.id){localStorage.id = result.id}
       this.props.history.push('/homepage/user')
     })
     .catch(error => console.log('error', error));
