@@ -7,6 +7,8 @@ var User = require('./User');
 var VerifyToken = require('../auth/verifyToken');
 var jwt = require('jsonwebtoken');
 var config = require('../config');
+var cors = require('cors')
+router.use(cors());
 
 // CREATES A NEW USER
 // router.post('/', function (req, res) {

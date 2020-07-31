@@ -78,3 +78,9 @@
 .homepageButtons {
   margin: 0.5em 8em;
 }
+
+.update {
+  border-style: solid;
+  border-width: medium;
+  border-color: black;
+}

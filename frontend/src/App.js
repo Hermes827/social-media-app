@@ -1,8 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Button from 'react-bootstrap/Button';
-import Jumbotron from 'react-bootstrap/Jumbotron'
 import Login from './components/login.js'
 import Signup from './components/signup.js'
 import Welcomepage from './components/welcomepage.js'
@@ -11,8 +8,7 @@ import Userpage from './components/userpage.js'
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 class App extends React.Component {
