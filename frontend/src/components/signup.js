@@ -1,10 +1,11 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Jumbotron from 'react-bootstrap/Jumbotron'
-import {
-  Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 import {withRouter} from 'react-router';
+import { compose } from 'redux'
+import { connect } from 'react-redux';
+import { fetchUserData } from '../actions/index.js';
 
 class Signup extends React.Component {
 
@@ -19,18 +20,17 @@ class Signup extends React.Component {
   }
 
   captureText = (e) => {
-  console.log(e.target.value)
   this.setState({
     [e.target.name]: e.target.value
   })
-  console.log(e.target.name)
 }
 
 onSubmit = (e) => {
   e.preventDefault()
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
-  var raw = JSON.stringify({"name": this.state.name, "email": this.state.email, "username": this.state.username, "password": this.state.password});
+  var raw = JSON.stringify({"name": this.state.name, "email": this.state.email,
+    "username": this.state.username, "password": this.state.password});
   var requestOptions = {
     method: 'POST',
     headers: myHeaders,
@@ -41,6 +41,7 @@ onSubmit = (e) => {
     .then(response => response.json())
     .then(result => {
       if(result.token){localStorage.token = result.token}
+      this.props.fetchUserData(localStorage.token)
       this.props.history.push('/homepage/user')
     })
     .catch(error => console.log('error', error));
@@ -71,4 +72,14 @@ onSubmit = (e) => {
 }
 }
 
-export default withRouter(Signup)
+const mapDispatchToProps = {
+  fetchUserData
+};
+
+const mapStateToProps = (state) => ({
+})
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+)(Signup);

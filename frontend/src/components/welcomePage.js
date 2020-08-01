@@ -1,9 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Jumbotron from 'react-bootstrap/Jumbotron'
-import {
-  Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class Welcomepage extends React.Component {
 

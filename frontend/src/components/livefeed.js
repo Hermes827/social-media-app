@@ -2,7 +2,6 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Update from './update'
 import { connect } from 'react-redux';
-// import { loadUser } from '../actions/index.js';
 
 class Livefeed extends React.Component {
 
@@ -61,19 +60,6 @@ onSubmit = (e) => {
     .catch(error => console.log('error', error));
   }
 
-  // delete(arg){
-  //   var requestOptions = {
-  //     method: 'DELETE',
-  //     redirect: 'follow'
-  //   };
-  //   fetch(`http://localhost:4000/updates/${arg}`, requestOptions)
-  //     .then(response => response.json())
-  //     .then(result => {
-  //       console.log(result)
-  //     })
-  //     .catch(error => console.log('error', error));
-  // }
-
   random = () => {
     console.log(this.props.currentUser.name)
   }
@@ -82,7 +68,6 @@ onSubmit = (e) => {
   return (
     <div className="livefeed">
       <button onClick={this.random}>click</button>
-
       <form>
         <label>Title: </label>
         <input type="text" name="title" placeholder="title" onChange={this.captureText}></input>
@@ -102,16 +87,10 @@ onSubmit = (e) => {
 }
 
 const mapDispatchToProps = {
-  // playerActs, computerActs, scorePoint
-
 };
 
 const mapStateToProps = (state) => ({
   currentUser: state.currentUser
-
-  // playerTurn: state.playerTurn,
-  // computerPicks: state.computerPicks,
-  // computerTurnNow: state.computerTurnNow
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Livefeed);

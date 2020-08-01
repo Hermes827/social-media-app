@@ -1,15 +1,11 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Jumbotron from 'react-bootstrap/Jumbotron'
-import {
-  Link
-} from "react-router-dom";
-import {withRouter} from 'react-router';
+import { Link } from "react-router-dom";
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-// import { loadUser } from '../actions/index.js';
-// import { fetchPosts } from '../actions/index.js';
 import { compose } from 'redux'
-import { logOutUser } from '../actions/index.js';
+import { fetchUserData } from '../actions/index.js';
 
 class Login extends React.Component {
 
@@ -22,11 +18,10 @@ class Login extends React.Component {
   }
 
   captureText = (e) => {
-
-  this.setState({
-    [e.target.name]: e.target.value
-  })
-}
+      this.setState({
+        [e.target.name]: e.target.value
+      })
+    }
 
 onSubmit = (e) => {
   e.preventDefault()
@@ -43,17 +38,10 @@ onSubmit = (e) => {
     .then(response => response.json())
     .then(result => {
       if(result.token){localStorage.token = result.token}
-      // if(result.id){localStorage.id = result.id}
-      this.random(result.id)
+      this.props.fetchUserData(localStorage.token)
       this.props.history.push('/homepage/user')
     })
     .catch(error => console.log('error', error));
-}
-
-random(arg){
-  // this.props.loadUser()
-  // this.props.fetchPosts()
-  this.props.logOutUser(arg)
 }
 
   render(){
@@ -72,24 +60,16 @@ random(arg){
           <Button variant="primary">Cancel</Button>
         </Link>
       </Jumbotron>
-      <button onClick={this.random}>click</button>
     </div>
   );
 }
 }
 
 const mapDispatchToProps = {
-  // playerActs, computerActs, scorePoint
-  // loadUser, fetchPosts,
-  logOutUser
+  fetchUserData
 };
 
 const mapStateToProps = (state) => ({
-  currentUser: state.currentUser
-
-  // playerTurn: state.playerTurn,
-  // computerPicks: state.computerPicks,
-  // computerTurnNow: state.computerTurnNow
 })
 
 export default compose(
