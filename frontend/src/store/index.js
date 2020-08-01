@@ -8,4 +8,5 @@ function multipleFunctions(){
   applyMiddleware(thunk)
 }
 
-export const store = createStore(reducer, multipleFunctions() )
+// export const store = createStore(reducer, multipleFunctions())
+export const store = createStore(reducer, applyMiddleware(thunk))

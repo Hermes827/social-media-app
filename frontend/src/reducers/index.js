@@ -2,7 +2,7 @@ import {
   FETCH_PRODUCTS_BEGIN,
   FETCH_PRODUCTS_SUCCESS,
   FETCH_PRODUCTS_FAILURE
-} from './productActions';
+} from '../actions/index.js';
 
 const initialState = {
   currentUser: {},
@@ -16,14 +16,12 @@ const initialState = {
 }
 
 export function reducer(state = initialState, action) {
-  console.log('reducer', state, action);
+  // console.log('reducer', state, action);
   switch(action.type){
 
      case 'LOAD_USER':
-     var requestOptions = {
-  method: 'GET',
-  redirect: 'follow'
-};
+     console.log("hello")
+     break
 
 case FETCH_PRODUCTS_BEGIN:
     // Mark the state as "loading" so we can show a spinner or something
@@ -37,11 +35,12 @@ case FETCH_PRODUCTS_BEGIN:
   case FETCH_PRODUCTS_SUCCESS:
     // All done: set loading "false".
     // Also, replace the items with the ones from the server
-    return {
-      ...state,
-      loading: false,
-      // items: action.payload.products
-    };
+    return Object.assign({}, state, {
+      currentUser: action.payload.products1
+    //   computerPicks: [...state.computerPicks, randomDiv.slice(4,5)],
+    //   playerTurn: state.playerTurn = true,
+    //   computerTurn: state.computerTurn = false
+    });
 
   case FETCH_PRODUCTS_FAILURE:
     // The request failed. It's done. So set loading to "false".

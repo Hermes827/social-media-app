@@ -10,9 +10,9 @@ export const fetchProductsBegin = () => ({
   type: FETCH_PRODUCTS_BEGIN
 });
 
-export const fetchProductsSuccess = products => ({
+export const fetchProductsSuccess = (products, products1) => ({
   type: FETCH_PRODUCTS_SUCCESS,
-  payload: { products }
+  payload: { products, products1 }
 });
 
 export const fetchProductsFailure = error => ({
@@ -20,33 +20,45 @@ export const fetchProductsFailure = error => ({
   payload: { error }
 });
 
-export function loadUser(){
-  return { type: LOADUSER }
-}
+// export function loadUser(){
+//   return { type: LOADUSER }
+// }
+
+
 //
 // export function playerActs(e){
 //   return { type: PLAYERACTS, payload: e }
 // }
 //
+
+
+export function logOutUser(arg) {
+  return function(dispatch, getState) {
+    return fetch(`http://localhost:4000/users/${arg}`)
+      .then(response => response.json())
+      .then(json => {
+        // console.log(json)
+        dispatch(fetchProductsSuccess(arg, json))
+      })
+  };
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // export function scorePoint(arg, arg1){
 //   return { type: SCOREPOINT, payload: arg, payload1: arg1 }
 // }
-
-// export const addTodo = ({ title, userId }) => {
-//   return dispatch => {
-//     dispatch(addTodoStarted());
-//
-//     axios
-//       .post(`https://jsonplaceholder.typicode.com/todos`, {
-//         title,
-//         userId,
-//         completed: false
-//       })
-//       .then(res => {
-//         dispatch(addTodoSuccess(res.data));
-//       })
-//       .catch(err => {
-//         dispatch(addTodoFailure(err.message));
-//       });
-//   };
-// };

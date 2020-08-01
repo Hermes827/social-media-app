@@ -5,6 +5,11 @@ import {
   Link
 } from "react-router-dom";
 import {withRouter} from 'react-router';
+import { connect } from 'react-redux';
+// import { loadUser } from '../actions/index.js';
+// import { fetchPosts } from '../actions/index.js';
+import { compose } from 'redux'
+import { logOutUser } from '../actions/index.js';
 
 class Login extends React.Component {
 
@@ -38,10 +43,17 @@ onSubmit = (e) => {
     .then(response => response.json())
     .then(result => {
       if(result.token){localStorage.token = result.token}
-      if(result.id){localStorage.id = result.id}
+      // if(result.id){localStorage.id = result.id}
+      this.random(result.id)
       this.props.history.push('/homepage/user')
     })
     .catch(error => console.log('error', error));
+}
+
+random(arg){
+  // this.props.loadUser()
+  // this.props.fetchPosts()
+  this.props.logOutUser(arg)
 }
 
   render(){
@@ -60,9 +72,27 @@ onSubmit = (e) => {
           <Button variant="primary">Cancel</Button>
         </Link>
       </Jumbotron>
+      <button onClick={this.random}>click</button>
     </div>
   );
 }
 }
 
-export default withRouter(Login)
+const mapDispatchToProps = {
+  // playerActs, computerActs, scorePoint
+  // loadUser, fetchPosts,
+  logOutUser
+};
+
+const mapStateToProps = (state) => ({
+  currentUser: state.currentUser
+
+  // playerTurn: state.playerTurn,
+  // computerPicks: state.computerPicks,
+  // computerTurnNow: state.computerTurnNow
+})
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+)(Login);

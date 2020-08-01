@@ -18,6 +18,7 @@ class Update extends React.Component {
     <div className="update">
       <h1>{this.props.info.title}</h1>
       <h1>{this.props.info.content}</h1>
+      <h5>{this.props.info.authorName}</h5>
       <h5>{this.props.info.date}</h5>
       <button onClick={this.delete}>delete</button>
     </div>

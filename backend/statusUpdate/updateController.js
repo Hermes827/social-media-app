@@ -16,7 +16,8 @@ router.post('/', VerifyToken, function (req, res) {
             title: req.body.title,
             content: req.body.content,
             date: req.body.date,
-            authorID: req.body.authorID
+            authorID: req.body.authorID,
+            authorName: req.body.authorName
         },
         function (err, update) {
             if (err) return res.status(500).send("There was a problem adding the information to the database.");

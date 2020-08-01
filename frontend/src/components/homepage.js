@@ -12,8 +12,6 @@ class Homepage extends React.Component {
   hasToken(){
     if(!localStorage.token){
       this.props.history.push('/')
-    } else {
-      console.log(localStorage)
     }
   }
 
