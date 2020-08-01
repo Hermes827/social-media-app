@@ -4,6 +4,12 @@ export const getData = (arg) => ({
   payload: { arg }
 });
 
+export const GET_UPDATES = 'GET_UPDATES';
+export const getUpdates = (arg) => ({
+  type: GET_UPDATES,
+  payload: { arg }
+});
+
 export function fetchUserData(arg) {
   return function(dispatch, getState) {
     var myHeaders = new Headers();
@@ -21,22 +27,17 @@ export function fetchUserData(arg) {
   };
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// export function scorePoint(arg, arg1){
-//   return { type: SCOREPOINT, payload: arg, payload1: arg1 }
-// }
+export function getAllUpdates(arg) {
+  console.log("hello")
+  return function(dispatch, getState) {
+    var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+    };
+    fetch("http://localhost:4000/updates", requestOptions)
+    .then(response => response.json())
+    .then(json => {
+      dispatch(getUpdates(json))
+    })
+  };
+}

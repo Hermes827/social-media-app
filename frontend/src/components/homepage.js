@@ -1,6 +1,9 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import {withRouter} from 'react-router';
+import { Link } from "react-router-dom";
+import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
+import { compose } from 'redux'
 
 class Homepage extends React.Component {
 
@@ -20,6 +23,7 @@ class Homepage extends React.Component {
     <div className="homepage">
     <Button className="homepageButtons">search</Button>
     <Button className="homepageButtons">Edit profile</Button>
+    {this.props.currentUser.name}
     <Button className="homepageButtons">Settings</Button>
     <Button className="homepageButtons" onClick={this.logout}>Log out</Button>
     {this.hasToken()}
@@ -28,4 +32,15 @@ class Homepage extends React.Component {
 }
 }
 
-export default withRouter(Homepage);
+const mapDispatchToProps = {
+};
+
+const mapStateToProps = (state) => ({
+  currentUser: state.currentUser
+})
+
+// export default withRouter(Homepage);
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+)(Homepage);
