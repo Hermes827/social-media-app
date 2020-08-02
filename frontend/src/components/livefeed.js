@@ -56,14 +56,9 @@ onSubmit = (e) => {
     .catch(error => console.log('error', error));
   }
 
-  random = () => {
-    console.log(this.props.updates)
-  }
-
   render(){
   return (
     <div className="livefeed">
-      <button onClick={this.random}>click for updates</button>
       <form>
         <label>Title: </label>
         <input type="text" name="title" placeholder="title" value={this.state.title} onChange={this.captureText}></input>

@@ -5,9 +5,27 @@ import { getAllUpdates } from '../actions/index.js';
 
 class Update extends React.Component {
 
+  constructor(){
+    super()
+    this.state = {
+      canDelete: false
+    }
+  }
+
+  renderDeleteButton = () => {
+    if(this.props.info.authorID === this.props.currentUser._id){
+      return null
+    } else {
+      return "hideDeleteButton"
+    }
+  }
+
   delete = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("x-access-token", localStorage.token);
     var requestOptions = {
       method: 'DELETE',
+      headers: myHeaders,
       redirect: 'follow'
     };
     fetch(`http://localhost:4000/updates/${this.props.info._id}`, requestOptions)
@@ -17,32 +35,28 @@ class Update extends React.Component {
         this.props.getAllUpdates()
       })
       .catch(error => console.log('error', error));
-
   }
 
   render(){
   return (
     <div className="update">
-      <button onClick={this.props.getAllUpdates}>click</button>
       <h1>{this.props.info.title}</h1>
       <h1>{this.props.info.content}</h1>
       <h5>{this.props.info.authorName}</h5>
       <h5>{this.props.info.date}</h5>
-      <button onClick={this.delete}>delete</button>
-
+      <button className={this.renderDeleteButton()} onClick={this.delete}>delete</button>
     </div>
   );
 }
 }
-
-// export default Update;
 
 const mapDispatchToProps = {
   getAllUpdates
 };
 
 const mapStateToProps = (state) => ({
-  updates: state.updates
+  updates: state.updates,
+  currentUser: state.currentUser
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Update);

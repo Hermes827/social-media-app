@@ -33,13 +33,13 @@ router.get('/', function (req, res) {
     });
 });
 
-router.delete('/:id', function (req, res) {
-    Update.findByIdAndRemove(req.params.id, function (err, update) {
-      // console.log("this is the " + update)
-        if(update === null){return}
-        if (err) return res.status(500).send("There was a problem deleting the user.");
-        res.status(200).send("update: "+ update.title +" was deleted.");
-    });
+router.delete('/:id', VerifyToken, function (req, res) {
+  Update.findById(req.params.id, function (err, update) {
+        if (err) return res.status(500).send("There was a problem finding the user.");
+        if (!update) return res.status(404).send("No user found.");
+        if(update.authorID === req.userId){update.remove({})}
+        res.status(200).send(update);
 });
+})
 
 module.exports = router;
