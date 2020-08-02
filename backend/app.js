@@ -11,4 +11,7 @@ app.use('/api/auth', AuthController);
 var UpdateController = require('./statusUpdate/updateController');
 app.use('/updates', UpdateController);
 
+var CommentController = require('./comment/commentController');
+app.use('/comments', CommentController);
+
 module.exports = app;
