@@ -28,7 +28,7 @@ export function fetchUserData(arg) {
 }
 
 export function getAllUpdates(arg) {
-  console.log("hello")
+  // console.log("hello")
   return function(dispatch, getState) {
     var requestOptions = {
     method: 'GET',

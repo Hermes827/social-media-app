@@ -5,13 +5,11 @@ import { connect } from 'react-redux';
 import { fetchUserData } from '../actions/index.js';
 import { getAllUpdates } from '../actions/index.js';
 
-
 class Livefeed extends React.Component {
 
   constructor(){
     super()
     this.state = {
-      updates: [],
       title: "",
       content: ""
     }
@@ -20,52 +18,7 @@ class Livefeed extends React.Component {
   componentDidMount(){
   this.props.fetchUserData(localStorage.token)
   this.props.getAllUpdates()
-  // var requestOptions = {
-  // method: 'GET',
-  // redirect: 'follow'
-  // };
-  // fetch("http://localhost:4000/updates", requestOptions)
-  // .then(response => response.json())
-  // .then(result => {
-  //   this.setState({
-  //     updates: result
-  //   })
-  // })
-  // .catch(error => console.log('error', error));
   }
-
-  // componentDidMount(){
-  // this.props.fetchUserData(localStorage.token)
-  // var requestOptions = {
-  // method: 'GET',
-  // redirect: 'follow'
-  // };
-  // fetch("http://localhost:4000/updates", requestOptions)
-  // .then(response => response.json())
-  // .then(result => {
-  //   this.setState({
-  //     updates: result
-  //   })
-  // })
-  // .catch(error => console.log('error', error));
-  // }
-
-// static getDerivedStateFromProps(nextProps, prevState){
-//   console.log(nextProps)
-//   console.log(prevState)
-//   //  if(nextProps.someValue!==prevState.someValue){
-//   //    return { someState: nextProps.someValue};
-//   // }
-//   // else return null;
-// }
-
-componentDidUpdate(prevProps, prevState, snapshot){
-  // console.log(prevState)
-  // console.log(prevProps)
-  // console.log(this.state)
-  // if()
-}
-
 
   captureText = (e) => {
     this.setState({
@@ -94,26 +47,30 @@ onSubmit = (e) => {
     .then(response => response.json())
     .then(result => {
       console.log(result)
+      this.setState({
+        title: "",
+        content: ""
+      })
+      this.props.getAllUpdates()
     })
     .catch(error => console.log('error', error));
-    this.props.getAllUpdates()
   }
 
   random = () => {
-    console.log(this.props)
+    console.log(this.props.updates)
   }
 
   render(){
   return (
     <div className="livefeed">
-      <button onClick={this.random}>click</button>
+      <button onClick={this.random}>click for updates</button>
       <form>
         <label>Title: </label>
-        <input type="text" name="title" placeholder="title" onChange={this.captureText}></input>
+        <input type="text" name="title" placeholder="title" value={this.state.title} onChange={this.captureText}></input>
         <label>Content: </label>
-        <input type="text" name="content" placeholder="content" onChange={this.captureText}></input>
+        <input type="text" name="content" placeholder="content" value={this.state.content} onChange={this.captureText}></input>
+        <Button variant="primary" onClick={this.onSubmit}>submit</Button>
       </form>
-      <Button variant="primary" onClick={this.onSubmit}>submit</Button>
       {this.props.updates.map(update => {
         return <Update
                 key={update._id}

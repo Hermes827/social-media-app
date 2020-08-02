@@ -11,12 +11,13 @@ class Update extends React.Component {
       redirect: 'follow'
     };
     fetch(`http://localhost:4000/updates/${this.props.info._id}`, requestOptions)
-      .then(response => response.json())
+      .then(response => response.text())
       .then(result => {
         console.log(result)
+        this.props.getAllUpdates()
       })
       .catch(error => console.log('error', error));
-      this.props.getAllUpdates()
+
   }
 
   render(){
@@ -28,6 +29,7 @@ class Update extends React.Component {
       <h5>{this.props.info.authorName}</h5>
       <h5>{this.props.info.date}</h5>
       <button onClick={this.delete}>delete</button>
+
     </div>
   );
 }
