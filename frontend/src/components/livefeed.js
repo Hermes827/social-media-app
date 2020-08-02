@@ -96,6 +96,7 @@ onSubmit = (e) => {
       console.log(result)
     })
     .catch(error => console.log('error', error));
+    this.props.getAllUpdates()
   }
 
   random = () => {
