@@ -9,6 +9,7 @@ var jwt = require('jsonwebtoken');
 var config = require('../config');
 var cors = require('cors')
 router.use(cors());
+var Update = require('../statusUpdate/update');
 
 router.post('/', VerifyToken, function (req, res){
     Comment.create({
@@ -25,11 +26,26 @@ router.post('/', VerifyToken, function (req, res){
         });
 });
 
-router.get('/', function (req, res) {
-    Comment.find({}, function (err, updates) {
+router.get('/:id',  function (req, res) {
+  Comment.findById(req.params.id, function (err, comment) {
+        if (err) return res.status(500).send("There was a problem finding the user.");
+        if (!comment) return res.status(404).send("No user found.");
+        res.status(200).send(comment);
+});
+});
+
+router.get('/',  function (req, res) {
+    Comment.find({"updateID": req.query.updateID}, function (err, comments) {
         if (err) return res.status(500).send("There was a problem finding the users.");
-        res.status(200).send(updates);
-        console.log(updates)
+        res.status(200).send(comments);
+    });
+});
+
+router.delete('/', function (req, res) {
+    Comment.remove({}, function (err, comments) {
+        if (err) return res.status(500).send("There was a problem finding the users.");
+        res.status(200).send(comments);
+        console.log(comments)
     });
 });
 

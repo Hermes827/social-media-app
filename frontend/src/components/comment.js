@@ -2,7 +2,6 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
 import { getAllUpdates } from '../actions/index.js';
-import { getAllComments } from '../actions/index.js';
 
 class Comment extends React.Component {
 
@@ -11,20 +10,19 @@ class Comment extends React.Component {
   return (
     <div className="update">
       <h5>{this.props.info.authorName + ": " + this.props.info.content}</h5>
-      {console.log(this.props.info)}
+
     </div>
   );
 }
 }
 
 const mapDispatchToProps = {
-  getAllUpdates, getAllComments
+  getAllUpdates
 };
 
 const mapStateToProps = (state) => ({
   updates: state.updates,
-  currentUser: state.currentUser,
-  comments: state.comments
+  currentUser: state.currentUser
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Comment);

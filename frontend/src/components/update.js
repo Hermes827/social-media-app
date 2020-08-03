@@ -2,7 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
 import { getAllUpdates } from '../actions/index.js';
-import { getAllComments } from '../actions/index.js';
+// import { getAllComments } from '../actions/index.js';
 import Comment from './comment'
 
 class Update extends React.Component {
@@ -10,13 +10,30 @@ class Update extends React.Component {
   constructor(){
     super()
     this.state = {
-      canDelete: false,
-      content: ""
+      content: "",
+      comments: []
     }
   }
 
   componentDidMount(){
-    this.props.getAllComments()
+    this.getComments()
+  }
+
+getComments(){
+
+  var requestOptions = {
+  method: 'GET',
+  redirect: 'follow'
+  };
+
+  fetch(`http://localhost:4000/comments/?updateID=${this.props.info._id}`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      this.setState({
+        comments: result
+      })
+    })
+    .catch(error => console.log('error', error));
   }
 
   captureText = (e) => {
@@ -31,6 +48,7 @@ class Update extends React.Component {
 
   submitComment = (e) => {
     e.preventDefault()
+
     var myHeaders = new Headers();
     myHeaders.append("x-access-token", `${localStorage.token}`);
     myHeaders.append("Content-Type", "application/json");
@@ -39,22 +57,24 @@ class Update extends React.Component {
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     var dateTime = date+' '+time;
+
     var raw = JSON.stringify({"userName": this.props.currentUser.userName, "content": this.state.content, "date": dateTime,
       "authorID": this.props.currentUser._id, "authorName": this.props.currentUser.name, "updateID": this.props.info._id});
+
     var requestOptions = {
       method: 'POST',
       headers: myHeaders,
       body: raw,
       redirect: 'follow'
     };
+
     fetch("http://localhost:4000/comments", requestOptions)
       .then(response => response.json())
       .then(result => {
-        console.log(result)
         this.setState({
           content: ""
         })
-        this.props.getAllComments()
+        this.getComments()
       })
       .catch(error => console.log('error', error));
   }
@@ -93,35 +113,28 @@ class Update extends React.Component {
       <h5>{this.props.info.date}</h5>
       <Button variant="primary" onClick={this.comment}>comment</Button>
       <Button variant="primary" className={this.renderDeleteButton()} onClick={this.delete}>delete</Button>
-        <form onSubmit={this.submitComment}>
-          <input type="text" name="content" placeholder="leave a comment" id="myTextField" value={this.state.comment} onChange={this.captureText}></input>
-        </form>
-        {console.log(this.state.content)}
-        {this.props.comments.map(comment => {
+        {this.state.comments.map(comment => {
           return <Comment
                   key={comment._id}
                   info={comment}
                   />
         })}
+        <form onSubmit={this.submitComment}>
+          <input type="text" name="content" placeholder="leave a comment" id="myTextField" value={this.state.comment} onChange={this.captureText}></input>
+        </form>
+        {console.log(this.state.comments)}
     </div>
   );
 }
 }
 
 const mapDispatchToProps = {
-  getAllUpdates, getAllComments
+  getAllUpdates
 };
 
 const mapStateToProps = (state) => ({
   updates: state.updates,
-  currentUser: state.currentUser,
-  comments: state.comments
+  currentUser: state.currentUser
 })
-
-// <form onSubmit={this.submitComment}>
-//   <input type="text" name="title" placeholder="leave a comment" id="myTextField" value={this.state.comment} onChange={this.captureText}></input>
-//   <input type="text" name="title" placeholder="title" value={this.state.comment} onChange={this.captureText}></input>
-// </form>
-// {console.log(this.state.comment)}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Update);

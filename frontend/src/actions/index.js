@@ -10,11 +10,11 @@ export const getUpdates = (arg) => ({
   payload: { arg }
 });
 
-export const GET_COMMENTS = 'GET_COMMENTS';
-export const getComments = (arg) => ({
-  type: GET_COMMENTS,
-  payload: { arg }
-});
+// export const GET_COMMENTS = 'GET_COMMENTS';
+// export const getComments = (arg) => ({
+//   type: GET_COMMENTS,
+//   payload: { arg }
+// });
 
 export function fetchUserData(arg) {
   return function(dispatch, getState) {
@@ -34,7 +34,6 @@ export function fetchUserData(arg) {
 }
 
 export function getAllUpdates(arg) {
-  // console.log("hello")
   return function(dispatch, getState) {
     var requestOptions = {
     method: 'GET',
@@ -48,17 +47,16 @@ export function getAllUpdates(arg) {
   };
 }
 
-export function getAllComments(arg) {
-  console.log("hello")
-  return function(dispatch, getState) {
-    var requestOptions = {
-    method: 'GET',
-    redirect: 'follow'
-    };
-    fetch("http://localhost:4000/comments", requestOptions)
-    .then(response => response.json())
-    .then(json => {
-      dispatch(getComments(json.reverse()))
-    })
-  };
-}
+// export function getAllComments(arg) {
+//   return function(dispatch, getState) {
+//     var requestOptions = {
+//     method: 'GET',
+//     redirect: 'follow'
+//     };
+//     fetch(`http://localhost:4000/comments?updateID=${arg}`, requestOptions)
+//     .then(response => response.json())
+//     .then(json => {
+//       dispatch(getComments(json.reverse()))
+//     })
+//   };
+// }

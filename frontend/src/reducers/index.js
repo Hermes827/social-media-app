@@ -1,11 +1,11 @@
 import { GET_DATA } from '../actions/index.js';
 import { GET_UPDATES } from '../actions/index.js';
-import { GET_COMMENTS } from '../actions/index.js';
+// import { GET_COMMENTS } from '../actions/index.js';
 
 const initialState = {
   currentUser: {},
   updates: [],
-  comments: []
+  // comments: []
 }
 
 export function reducer(state = initialState, action) {
@@ -22,10 +22,10 @@ export function reducer(state = initialState, action) {
       updates: action.payload.arg
     });
 
-  case GET_COMMENTS:
-    return Object.assign({}, state, {
-      comments: action.payload.arg
-    });
+  // case GET_COMMENTS:
+  //   return Object.assign({}, state, {
+  //     comments: action.payload.arg
+  //   });
 
     default:
       return state

@@ -9,6 +9,7 @@ var jwt = require('jsonwebtoken');
 var config = require('../config');
 var cors = require('cors')
 router.use(cors());
+var Comment = require('../comment/comment');
 
 router.post('/', VerifyToken, function (req, res) {
 
@@ -33,13 +34,47 @@ router.get('/', function (req, res) {
     });
 });
 
-router.delete('/:id', VerifyToken, function (req, res) {
+router.get('/:id', function (req, res) {
+  console.log(req.params.id)
   Update.findById(req.params.id, function (err, update) {
         if (err) return res.status(500).send("There was a problem finding the user.");
         if (!update) return res.status(404).send("No user found.");
-        if(update.authorID === req.userId){update.remove({})}
         res.status(200).send(update);
 });
 })
 
+router.delete('/', function (req, res) {
+    Update.remove({}, function (err, updates) {
+        if (err) return res.status(500).send("There was a problem finding the users.");
+        res.status(200).send(updates);
+        console.log(updates)
+    });
+});
+
+router.delete('/:id', VerifyToken, function (req, res) {
+  Update.findById(req.params.id, function (err, update) {
+        if (err) return res.status(500).send("There was a problem finding the user.");
+        if (!update) return res.status(404).send("No user found.");
+         if(update.authorID === req.userId){
+          // var comments = Comment.find({"updateID": req.params.id}).exec()
+          // comments.then(comment => {
+          //   comment.remove()
+          // })
+          //need to figure out how to remove comments that belong to the update
+          update.remove({})
+        }
+        res.status(200).send(update);
+});
+
+})
+
+// deleteComments(){
+//
+// }
+
 module.exports = router;
+
+// Comment.find({"updateID": req.query.updateID}, function (err, comments) {
+//     if (err) return res.status(500).send("There was a problem finding the users.");
+//     res.status(200).send(comments);
+// });
