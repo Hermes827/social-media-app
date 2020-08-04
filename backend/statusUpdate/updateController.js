@@ -56,25 +56,13 @@ router.delete('/:id', VerifyToken, function (req, res) {
         if (err) return res.status(500).send("There was a problem finding the user.");
         if (!update) return res.status(404).send("No user found.");
          if(update.authorID === req.userId){
-          // var comments = Comment.find({"updateID": req.params.id}).exec()
-          // comments.then(comment => {
-          //   comment.remove()
-          // })
-          //need to figure out how to remove comments that belong to the update
+           Comment.deleteMany({"updateID": req.params.id}, function (err, comment) {
+             console.log(comment)
+           });
           update.remove({})
         }
         res.status(200).send(update);
 });
-
 })
 
-// deleteComments(){
-//
-// }
-
 module.exports = router;
-
-// Comment.find({"updateID": req.query.updateID}, function (err, comments) {
-//     if (err) return res.status(500).send("There was a problem finding the users.");
-//     res.status(200).send(comments);
-// });
