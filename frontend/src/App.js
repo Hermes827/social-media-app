@@ -5,6 +5,9 @@ import Signup from './components/signup.js'
 import Welcomepage from './components/welcomepage.js'
 import Homepage from './components/homepage.js'
 import Userpage from './components/userpage.js'
+import Settings from './components/settings.js'
+import EditProfile from './components/editProfile.js'
+import Search from './components/search.js'
 import {
   BrowserRouter as Router,
   Switch,
@@ -36,8 +39,17 @@ class App extends React.Component {
          </Route>
          <Route path="/homepage">
            <Homepage/>
+             <Route path="/homepage/search">
+               <Search/>
+             </Route>
              <Route path="/homepage/user">
                <Userpage/>
+             </Route>
+             <Route path="/homepage/editprofile">
+               <EditProfile/>
+             </Route>
+             <Route path="/homepage/settings">
+               <Settings/>
              </Route>
          </Route>
        </Switch>

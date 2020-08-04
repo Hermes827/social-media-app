@@ -21,16 +21,27 @@ class Homepage extends React.Component {
   render(){
   return (
     <div className="homepage">
-    <Button className="homepageButtons">search</Button>
-    <Button className="homepageButtons">Edit profile</Button>
+      <Link to="/homepage/search">
+        <Button variant="primary" className="homepageButtons">Search</Button>
+      </Link>
+      <Link to="/homepage/editprofile">
+        <Button variant="primary" className="homepageButtons">Edit profile</Button>
+      </Link>
     {this.props.currentUser.name}
-    <Button className="homepageButtons">Settings</Button>
+      <Link to="/homepage/settings">
+        <Button variant="primary" className="homepageButtons">Settings</Button>
+      </Link>
     <Button className="homepageButtons" onClick={this.logout}>Log out</Button>
     {this.hasToken()}
     </div>
   );
 }
 }
+
+// <Link to="/search">
+//   <Button variant="primary" className="homepageButtons">search</Button>
+// </Link>
+
 
 const mapDispatchToProps = {
 };

@@ -3,7 +3,12 @@ var UserSchema = new mongoose.Schema({
   name: String,
   email: String,
   password: String,
-  username: String
+  username: String,
+  img:
+    {
+        data: Buffer,
+        contentType: String
+    } 
 });
 mongoose.model('User', UserSchema);
 

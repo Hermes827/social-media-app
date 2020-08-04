@@ -9,6 +9,10 @@ var jwt = require('jsonwebtoken');
 var config = require('../config');
 var cors = require('cors')
 router.use(cors());
+// var fs = require('fs');
+// var path = require('path');
+// require('dotenv/config');
+// var multer = require('multer');
 
 // CREATES A NEW USER
 router.post('/', function (req, res) {
@@ -29,6 +33,13 @@ router.get('/', function (req, res) {
         res.status(200).send(users);
     });
 });
+
+// router.post('/photo', function(req, res){
+//  var newItem = new Item();
+//  newItem.img.data = fs.readFileSync(req.files.userPhoto.path)
+//  newItem.img.contentType = ‘image/png’;
+//  newItem.save();
+// });
 
 // router.get('/:id', function (req, res) {
 //     User.findById(req.params.id, function (err, user) {

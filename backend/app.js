@@ -1,6 +1,10 @@
 var express = require('express');
 var app = express();
 var db = require('./db');
+// var fs = require('fs');
+// var path = require('path');
+// require('dotenv/config');
+// var multer = require('multer');
 
 var UserController = require('./user/userController');
 app.use('/users', UserController);
