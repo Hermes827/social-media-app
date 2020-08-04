@@ -4,11 +4,9 @@ var UserSchema = new mongoose.Schema({
   email: String,
   password: String,
   username: String,
-  img:
-    {
-        data: Buffer,
-        contentType: String
-    } 
+  profileImg: {
+      type: String
+  }
 });
 mongoose.model('User', UserSchema);
 
