@@ -9,6 +9,8 @@ var jwt = require('jsonwebtoken');
 var config = require('../config');
 var cors = require('cors')
 router.use(cors());
+const upload = require("../middleware/upload");
+
 // var fs = require('fs');
 // var path = require('path');
 // require('dotenv/config');
@@ -34,19 +36,25 @@ router.get('/', function (req, res) {
     });
 });
 
-// router.post('/photo', function(req, res){
-//  var newItem = new Item();
-//  newItem.img.data = fs.readFileSync(req.files.userPhoto.path)
-//  newItem.img.contentType = ‘image/png’;
-//  newItem.save();
-// });
 
-// router.get('/:id', function (req, res) {
-//     User.findById(req.params.id, function (err, user) {
-//         if (err) return res.status(500).send("There was a problem finding the user.");
-//         if (!user) return res.status(404).send("No user found.");
-//         res.status(200).send(user);
-//     });
-// });
+router.post('/uploadphoto', function (req, res) {
+  // console.log("hello")
+  // console.log(req.body)
+    // res.status(200).send(res);
+  const uploadFile = async (req, res) => {
+    try {
+      await upload(req, res);
+
+      console.log(req.file);
+      if (req.file == undefined) {
+        return res.send(`You must select a file.`);
+      }
+      return res.send(`File has been uploaded.`);
+    } catch (error) {
+      console.log(error);
+      return res.send(`Error when trying upload image: ${error}`);
+    }
+  };
+});
 
 module.exports = router;

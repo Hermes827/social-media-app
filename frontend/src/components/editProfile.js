@@ -2,14 +2,19 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
 import { getAllUpdates } from '../actions/index.js';
+import { Link } from "react-router-dom";
 
 class EditProfile extends React.Component {
 
   render(){
   return (
-    <div className="editprofile">
-    edit profile
-    </div>
+    <div className="container">
+
+              <Link to="/homepage/user">
+                <Button variant="primary">Back</Button>
+              </Link>
+          </div>
+
   );
 }
 }
