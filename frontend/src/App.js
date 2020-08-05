@@ -8,6 +8,7 @@ import Userpage from './components/userpage.js'
 import Settings from './components/settings.js'
 import EditProfile from './components/editProfile.js'
 import Search from './components/search.js'
+import Profile from './components/profile.js'
 import {
   BrowserRouter as Router,
   Switch,
@@ -50,6 +51,9 @@ class App extends React.Component {
              </Route>
              <Route path="/homepage/settings">
                <Settings/>
+             </Route>
+             <Route path="/homepage/profile/">
+               <Profile/>
              </Route>
          </Route>
        </Switch>

@@ -11,7 +11,8 @@ class Update extends React.Component {
     super()
     this.state = {
       content: "",
-      comments: []
+      comments: [],
+      user: null
     }
   }
 
@@ -29,7 +30,9 @@ class Update extends React.Component {
     fetch(`http://localhost:4000/users/find?userID=${this.props.info.authorID}`, requestOptions)
       .then(response => response.json())
       .then(result => {
-        console.log(result)
+        this.setState({
+          user: result
+        })
       })
       .catch(error => console.log('error', error));
   }
@@ -118,13 +121,19 @@ getComments(){
       .catch(error => console.log('error', error));
   }
 
+  imageSrc = () => {
+    if(this.state.user !== null){
+      return this.state.user.profileImg
+    }
+  }
+
   render(){
   return (
     <div className="update">
       <h1>{this.props.info.title}</h1>
       <h1>{this.props.info.content}</h1>
       <h5>{(this.props.info.authorID === this.props.currentUser._id) ? this.props.currentUser.name : this.props.info.authorName}</h5>
-      <img src={this.props.currentUser.profileImg} width="100"/>
+      <img src={this.imageSrc()} width="100"/>
       <h5>{this.props.info.date}</h5>
       <Button variant="primary" onClick={this.comment}>comment</Button>
       <Button variant="primary" className={this.renderDeleteButton()} onClick={this.delete}>delete</Button>
@@ -137,7 +146,7 @@ getComments(){
         <form onSubmit={this.submitComment}>
           <input type="text" name="content" placeholder="leave a comment" id="myTextField" value={this.state.comment} onChange={this.captureText}></input>
         </form>
-        {console.log(this.props.currentUser)}
+        {console.log(this.state.user)}
     </div>
   );
 }

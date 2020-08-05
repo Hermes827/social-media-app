@@ -9,13 +9,17 @@ class Homepage extends React.Component {
 
   logout = () => {
     delete localStorage.token
-    this.props.history.push('/')
+    // this.props.history.push('/')
   }
 
   hasToken(){
     if(!localStorage.token){
       this.props.history.push('/')
     }
+  }
+
+  componentDidMount(){
+
   }
 
   render(){
@@ -27,11 +31,14 @@ class Homepage extends React.Component {
       <Link to="/homepage/editprofile">
         <Button variant="primary" className="homepageButtons">Edit profile</Button>
       </Link>
-    {this.props.currentUser.name}
       <Link to="/homepage/settings">
         <Button variant="primary" className="homepageButtons">Settings</Button>
       </Link>
-    <Button className="homepageButtons" onClick={this.logout}>Log out</Button>
+      <Link to={`/homepage/profile/`}>
+        <Button variant="primary" className="homepageButtons">See Profile</Button>
+      </Link>
+        <Button className="homepageButtons" onClick={this.logout}>Log out</Button>
+        {console.log(this.props.currentUser._id)}
     {this.hasToken()}
     </div>
   );
