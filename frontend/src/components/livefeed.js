@@ -36,7 +36,7 @@ onSubmit = (e) => {
   var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   var dateTime = date+' '+time;
   var raw = JSON.stringify({"title": this.state.title,"content": this.state.content,
-    "date": dateTime, "authorID": this.props.currentUser._id, "authorName": this.props.currentUser.name });
+    "date": dateTime, "authorID": this.props.currentUser._id });
   var requestOptions = {
     method: 'POST',
     headers: myHeaders,
@@ -72,6 +72,7 @@ onSubmit = (e) => {
                 info={update}
                 />
       })}
+      {console.log(this.props.currentUser.profileImg)}
     </div>
   );
 }

@@ -13,7 +13,7 @@ let multer = require('multer'),
     mongoose = require('mongoose')
 const { v4: uuidv4 } = require('uuid');
 uuidv4()
-const DIR = '../public/';
+const DIR = './public/';
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -95,33 +95,29 @@ router.get('/', function (req, res) {
     });
 });
 
-
-router.post('/uploadphoto', function (req, res) {
-  const uploadFile = async (req, res) => {
-    try {
-      await upload(req, res);
-
-      console.log(req.file);
-      if (req.file == undefined) {
-        return res.send(`You must select a file.`);
-      }
-      return res.send(`File has been uploaded.`);
-    } catch (error) {
-      console.log(error);
-      return res.send(`Error when trying upload image: ${error}`);
-    }
-  };
+router.get('/find', function (req, res) {
+    User.findById(req.query.userID, function (err, users) {
+        if (err) return res.status(500).send("There was a problem finding the users.");
+        res.status(200).send(users);
+    });
 });
 
-//need to turn this into put method
+router.put('/uploadphoto', upload.single('profileImg'), VerifyToken, function (req, res) {
+  const url = req.protocol + '://' + req.get('host')
+  console.log("hello " + url)
+  User.findByIdAndUpdate(req.userId, {profileImg: url + '/public/' + req.file.filename}, function (err, user) {
+      if(err){
+        console.log(err)
+      } else {
+        console.log("Updated User : ", user);
+            res.status(200).send(user);
+        }
+      });
+    });
 
 module.exports = router;
 
 ////////////////////////////////////////////
-
-
-
-
 
 // User model
 // let User = require('../models/User');
