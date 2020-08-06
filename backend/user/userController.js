@@ -102,6 +102,18 @@ router.get('/find', function (req, res) {
     });
 });
 
+router.put('/addfriend', VerifyToken, function (req, res) {
+  // console.log(req.userId)
+  // User.findByIdAndUpdate(req.userId, {friends: [...User.friends, ]}, function (err, user) {
+  //     if(err){
+  //       console.log(err)
+  //     } else {
+  //       console.log("Updated User : ", user);
+  //           res.status(200).send(user);
+  //       }
+  //     });
+    });
+
 router.put('/uploadphoto', upload.single('profileImg'), VerifyToken, function (req, res) {
   const url = req.protocol + '://' + req.get('host')
   console.log("hello " + url)

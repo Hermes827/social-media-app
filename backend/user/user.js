@@ -6,7 +6,10 @@ var UserSchema = new mongoose.Schema({
   username: String,
   profileImg: {
       type: String
-  }
+  },
+  friends: [],
+  pendingFriends: [],
+  mailBox: []
 });
 mongoose.model('User', UserSchema);
 
