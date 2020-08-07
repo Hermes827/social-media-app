@@ -2,7 +2,6 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
 import { getAllUpdates } from '../actions/index.js';
-// import { getAllComments } from '../actions/index.js';
 import Comment from './comment'
 
 class Update extends React.Component {
@@ -59,13 +58,12 @@ getComments(){
     })
   }
 
-  comment(){
+  focusComment(){
     document.getElementById("myTextField").focus();
   }
 
   submitComment = (e) => {
     e.preventDefault()
-
     var myHeaders = new Headers();
     myHeaders.append("x-access-token", `${localStorage.token}`);
     myHeaders.append("Content-Type", "application/json");
@@ -135,7 +133,7 @@ getComments(){
       <h5>{(this.props.info.authorID === this.props.currentUser._id) ? this.props.currentUser.name : this.props.info.authorName}</h5>
       <img src={this.imageSrc()} width="100"/>
       <h5>{this.props.info.date}</h5>
-      <Button variant="primary" onClick={this.comment}>comment</Button>
+      <Button variant="primary" onClick={this.focusComment}>comment</Button>
       <Button variant="primary" className={this.renderDeleteButton()} onClick={this.delete}>delete</Button>
         {this.state.comments.map(comment => {
           return <Comment
@@ -146,7 +144,6 @@ getComments(){
         <form onSubmit={this.submitComment}>
           <input type="text" name="content" placeholder="leave a comment" id="myTextField" value={this.state.comment} onChange={this.captureText}></input>
         </form>
-        {console.log(this.state.user)}
     </div>
   );
 }

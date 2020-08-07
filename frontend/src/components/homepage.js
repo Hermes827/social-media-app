@@ -9,17 +9,13 @@ class Homepage extends React.Component {
 
   logout = () => {
     delete localStorage.token
-    // this.props.history.push('/')
+    this.hasToken()
   }
 
   hasToken(){
     if(!localStorage.token){
       this.props.history.push('/')
     }
-  }
-
-  componentDidMount(){
-
   }
 
   render(){
@@ -37,18 +33,14 @@ class Homepage extends React.Component {
       <Link to={`/homepage/profile/`}>
         <Button variant="primary" className="homepageButtons">See Profile</Button>
       </Link>
-        <Button className="homepageButtons" onClick={this.logout}>Log out</Button>
-        {console.log(this.props.currentUser._id)}
-    {this.hasToken()}
+        <Button variant="primary" className="homepageButtons" onClick={this.logout}>Log out</Button>
+      {(this.props.history.location.pathname === "/homepage" || this.props.history.location.pathname === "/homepage/" )
+        ? this.props.history.push('/homepage/user') : null}
+      {this.hasToken()}
     </div>
   );
 }
 }
-
-// <Link to="/search">
-//   <Button variant="primary" className="homepageButtons">search</Button>
-// </Link>
-
 
 const mapDispatchToProps = {
 };
@@ -57,7 +49,6 @@ const mapStateToProps = (state) => ({
   currentUser: state.currentUser
 })
 
-// export default withRouter(Homepage);
 export default compose(
   withRouter,
   connect(mapStateToProps, mapDispatchToProps)

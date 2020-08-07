@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
-import { getAllUpdates } from '../actions/index.js';
 import { Link } from "react-router-dom";
 import ThumbnailProfile from './thumbnailProfile.js'
 import { fetchUserData } from '../actions/index.js';
@@ -10,7 +9,6 @@ class Search extends React.Component {
 
   constructor(){
     super()
-
     this.state = {
       people: []
     }
@@ -20,27 +18,24 @@ class Search extends React.Component {
     this.props.fetchUserData(localStorage.token)
   }
 
-findFriends = () => {
-  var requestOptions = {
-  method: 'GET',
-  redirect: 'follow'
-};
+  findFriends = () => {
+    var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
 
-fetch("http://localhost:4000/users/", requestOptions)
-  .then(response => response.json())
-  .then(result => {
-    // console.log(result)
-    let newResult = result.filter(person => {
-      return person._id !== this.props.currentUser._id
+  fetch("http://localhost:4000/users/", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      let newResult = result.filter(person => {
+        return person._id !== this.props.currentUser._id
+      })
+      this.setState({
+        people: newResult
+      })
     })
-    console.log(newResult)
-    this.setState({
-      people: newResult
-    })
-  })
-  .catch(error => console.log('error', error));
+    .catch(error => console.log('error', error));
 }
-
 
   render(){
   return (
@@ -50,9 +45,8 @@ fetch("http://localhost:4000/users/", requestOptions)
     <Link to="/homepage/user">
       <Button variant="primary">Back</Button>
     </Link>
-    {console.log(this.props)}
     {this.state.people.map(person => {
-      return <ThumbnailProfile person={person}/>
+      return <ThumbnailProfile person={person} key={person._id}/>
     })}
     </div>
   );
@@ -60,11 +54,10 @@ fetch("http://localhost:4000/users/", requestOptions)
 }
 
 const mapDispatchToProps = {
-  getAllUpdates, fetchUserData
+  fetchUserData
 };
 
 const mapStateToProps = (state) => ({
-  updates: state.updates,
   currentUser: state.currentUser
 })
 

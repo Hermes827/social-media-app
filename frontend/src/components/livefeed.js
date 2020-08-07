@@ -2,8 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Update from './update'
 import { connect } from 'react-redux';
-import { fetchUserData } from '../actions/index.js';
-import { getAllUpdates } from '../actions/index.js';
+import { fetchUserData, getAllUpdates } from '../actions/index.js';
 
 class Livefeed extends React.Component {
 
@@ -72,7 +71,6 @@ onSubmit = (e) => {
                 info={update}
                 />
       })}
-      {console.log(this.props.currentUser.profileImg)}
     </div>
   );
 }

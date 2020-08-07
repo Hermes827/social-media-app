@@ -1,6 +1,5 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
-import Jumbotron from 'react-bootstrap/Jumbotron'
+import { Button, Jumbotron } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import {withRouter} from 'react-router';
 import { compose } from 'redux'

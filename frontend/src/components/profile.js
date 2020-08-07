@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
-import { getAllUpdates } from '../actions/index.js';
 import { fetchUserData } from '../actions/index.js';
 import { Link } from "react-router-dom";
 
@@ -16,8 +15,6 @@ class Profile extends React.Component {
     <div className="profile">
     <h1>{this.props.currentUser.name}</h1>
     <img src={this.props.currentUser.profileImg} width="100"/>
-    {console.log(this.props)}
-
     <Link to="/homepage/user">
       <Button variant="primary">Back</Button>
     </Link>
@@ -27,11 +24,10 @@ class Profile extends React.Component {
 }
 
 const mapDispatchToProps = {
-  getAllUpdates, fetchUserData
+  fetchUserData
 };
 
 const mapStateToProps = (state) => ({
-  updates: state.updates,
   currentUser: state.currentUser
 })
 
