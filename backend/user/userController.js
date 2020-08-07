@@ -103,8 +103,9 @@ router.get('/find', function (req, res) {
 });
 
 router.put('/addfriend', VerifyToken, function (req, res) {
-  // console.log(req.userId)
-  // User.findByIdAndUpdate(req.userId, {friends: [...User.friends, ]}, function (err, user) {
+  // console.log(req.query.userID)
+  console.log(req.userId)
+  // User.findById(req.userId, function (err, user) {
   //     if(err){
   //       console.log(err)
   //     } else {
@@ -112,6 +113,14 @@ router.put('/addfriend', VerifyToken, function (req, res) {
   //           res.status(200).send(user);
   //       }
   //     });
+  User.findByIdAndUpdate(req.query.userID, { $push: {"pendingFriends": req.userId} }, function (err, user) {
+      if(err){
+        console.log(err)
+      } else {
+        console.log("Updated User : ", user);
+            res.status(200).send(user);
+        }
+      });
     });
 
 router.put('/uploadphoto', upload.single('profileImg'), VerifyToken, function (req, res) {
@@ -125,6 +134,18 @@ router.put('/uploadphoto', upload.single('profileImg'), VerifyToken, function (r
             res.status(200).send(user);
         }
       });
+    });
+
+    router.put('/sendmessage', function(req, res){
+
+      User.findByIdAndUpdate(req.query.userID, { $push: {"mailBox": req.body} }, function (err, user) {
+          if(err){
+            console.log(err)
+          } else {
+            console.log("Updated User : ", user);
+                res.status(200).send(user);
+            }
+          });
     });
 
 module.exports = router;

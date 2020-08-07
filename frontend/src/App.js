@@ -9,10 +9,12 @@ import Settings from './components/settings.js'
 import EditProfile from './components/editProfile.js'
 import Search from './components/search.js'
 import Profile from './components/profile.js'
+import UserProfile from './components/userProfile.js'
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  useParams
 } from "react-router-dom";
 
 class App extends React.Component {
@@ -54,6 +56,9 @@ class App extends React.Component {
              </Route>
              <Route path="/homepage/profile/">
                <Profile/>
+             </Route>
+             <Route path="/homepage/userprofile/:id">
+               <UserProfile/>
              </Route>
          </Route>
        </Switch>

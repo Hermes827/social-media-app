@@ -7,16 +7,17 @@ import { Link } from "react-router-dom";
 
 class ThumbnailProfile extends React.Component {
 
-  getInfo(){
-    
+  seeProfile = () => {
+    console.log(this.props.person)
   }
 
   render(){
   return (
-    <div className="update" onClick={this.getInfo}>
+    <div className="update" onClick={this.seeProfile}>
     <h1>{this.props.person.name}</h1>
+    <Link to={`/homepage/userprofile/${this.props.person._id}`}>
     <img src={this.props.person.profileImg} width="100"/>
-    {console.log(this.props)}
+    </Link>
     <Button>Add friend</Button>
     </div>
   );

@@ -13,11 +13,11 @@ class Profile extends React.Component {
 
   render(){
   return (
-    <div className="update">
+    <div className="profile">
     <h1>{this.props.currentUser.name}</h1>
     <img src={this.props.currentUser.profileImg} width="100"/>
     {console.log(this.props)}
-    <Button>Add friend</Button>
+
     <Link to="/homepage/user">
       <Button variant="primary">Back</Button>
     </Link>
