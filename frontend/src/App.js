@@ -10,6 +10,7 @@ import EditProfile from './components/editProfile.js'
 import Search from './components/search.js'
 import Profile from './components/profile.js'
 import UserProfile from './components/userProfile.js'
+import Mailbox from './components/mailbox.js'
 import {
   BrowserRouter as Router,
   Switch,
@@ -52,6 +53,9 @@ class App extends React.Component {
              </Route>
              <Route path="/homepage/userprofile/:id">
                <UserProfile/>
+             </Route>
+             <Route path="/homepage/mailbox">
+               <Mailbox/>
              </Route>
          </Route>
        </Switch>

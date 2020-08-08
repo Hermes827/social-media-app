@@ -33,10 +33,14 @@ class Homepage extends React.Component {
       <Link to={`/homepage/profile/`}>
         <Button variant="primary" className="homepageButtons">See Profile</Button>
       </Link>
+      <Link to={`/homepage/mailbox/`}>
+        <Button variant="primary" className="homepageButtons">See Mailbox</Button>
+      </Link>
         <Button variant="primary" className="homepageButtons" onClick={this.logout}>Log out</Button>
       {(this.props.history.location.pathname === "/homepage" || this.props.history.location.pathname === "/homepage/" )
         ? this.props.history.push('/homepage/user') : null}
       {this.hasToken()}
+      {console.log(this.props.currentUser)}
     </div>
   );
 }

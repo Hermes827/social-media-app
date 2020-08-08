@@ -7,7 +7,7 @@ const initialState = {
 }
 
 export function reducer(state = initialState, action) {
-  console.log('reducer', state, action);
+  // console.log('reducer', state, action);
   switch(action.type){
 
   case GET_DATA:
