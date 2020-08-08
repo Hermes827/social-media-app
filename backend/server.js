@@ -1,10 +1,8 @@
 var app = require('./app');
 var express = require('express');
 var port = process.env.PORT || 4000;
-// app.use('/public', express.static('public'));
 
 app.use((req, res, next) => {
-    // Error goes via `next()` method
     setImmediate(() => {
         next(new Error('Something went wrong'));
     });

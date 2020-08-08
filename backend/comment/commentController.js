@@ -9,7 +9,6 @@ var jwt = require('jsonwebtoken');
 var config = require('../config');
 var cors = require('cors')
 router.use(cors());
-var Update = require('../statusUpdate/update');
 
 router.post('/', VerifyToken, function (req, res){
     Comment.create({

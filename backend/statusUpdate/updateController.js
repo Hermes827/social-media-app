@@ -30,12 +30,10 @@ router.get('/', function (req, res) {
     Update.find({}, function (err, updates) {
         if (err) return res.status(500).send("There was a problem finding the users.");
         res.status(200).send(updates);
-        console.log(updates)
     });
 });
 
 router.get('/:id', function (req, res) {
-  console.log(req.params.id)
   Update.findById(req.params.id, function (err, update) {
         if (err) return res.status(500).send("There was a problem finding the user.");
         if (!update) return res.status(404).send("No user found.");
