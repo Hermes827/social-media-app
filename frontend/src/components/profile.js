@@ -13,11 +13,13 @@ class Profile extends React.Component {
   render(){
   return (
     <div className="profile">
+    <div>
+      <Link to="/homepage/editprofile">
+        <Button variant="primary" className="homepageButtons">Edit profile</Button>
+      </Link>
+    </div>
     <h1>{this.props.currentUser.name}</h1>
-    <img src={this.props.currentUser.profileImg} width="100"/>
-    <Link to="/homepage/user">
-      <Button variant="primary">Back</Button>
-    </Link>
+    <img src={this.props.currentUser.profileImg} width="100" alt="profile"/>
     </div>
   );
 }

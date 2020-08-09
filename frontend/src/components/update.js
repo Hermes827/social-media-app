@@ -131,7 +131,7 @@ getComments(){
       <h1>{this.props.info.title}</h1>
       <h1>{this.props.info.content}</h1>
       <h5>{(this.props.info.authorID === this.props.currentUser._id) ? this.props.currentUser.name : this.props.info.authorName}</h5>
-      <img src={this.imageSrc()} width="100"/>
+      <img src={this.imageSrc()} width="100" alt="user"/>
       <h5>{this.props.info.date}</h5>
       <Button variant="primary" onClick={this.focusComment}>comment</Button>
       <Button variant="primary" className={this.renderDeleteButton()} onClick={this.delete}>delete</Button>

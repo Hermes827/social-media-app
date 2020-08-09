@@ -14,8 +14,7 @@ import Mailbox from './components/mailbox.js'
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  useParams
+  Route
 } from "react-router-dom";
 
 class App extends React.Component {
@@ -34,6 +33,9 @@ class App extends React.Component {
          <Route path="/signup">
            <Signup/>
          </Route>
+         <Route path="/userprofile/:id">
+           <UserProfile/>
+         </Route>
          <Route path="/homepage">
            <Homepage/>
              <Route path="/homepage/search">
@@ -48,7 +50,7 @@ class App extends React.Component {
              <Route path="/homepage/settings">
                <Settings/>
              </Route>
-             <Route path="/homepage/profile/">
+             <Route path="/homepage/profile">
                <Profile/>
              </Route>
              <Route path="/homepage/userprofile/:id">

@@ -1,6 +1,8 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
+import { compose } from 'redux'
 import { getAllUpdates, fetchUserData } from '../actions/index.js';
 import { Link } from "react-router-dom";
 
@@ -41,6 +43,8 @@ class EditProfile extends React.Component {
       .then(response => response.json())
       .then(result => {
         console.log(result)
+        alert("nice! your picture is uploaded")
+        this.props.history.push('/homepage/profile')
       })
       .catch(error => console.log('error', error));
         }
@@ -52,8 +56,8 @@ class EditProfile extends React.Component {
           <input type="file" onChange={this.onFileChange}/>
           <Button type="submit">Upload</Button>
       </form>
-      <Link to="/homepage/user">
-        <Button variant="primary">Back</Button>
+      <Link to="/homepage/profile">
+        <Button variant="primary">Cancel</Button>
       </Link>
     </div>
   );
@@ -69,6 +73,9 @@ const mapStateToProps = (state) => ({
   currentUser: state.currentUser
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+)(EditProfile);
 
 // <img src={(this.state.picture !== null) ? this.state.picture : null} alt="image displays here" width="200" height="300"/>

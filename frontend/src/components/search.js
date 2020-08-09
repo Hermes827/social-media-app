@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
-import { Link } from "react-router-dom";
 import ThumbnailProfile from './thumbnailProfile.js'
 import { fetchUserData } from '../actions/index.js';
 
@@ -42,9 +41,6 @@ class Search extends React.Component {
     <div className="search">
     search
     <Button onClick={this.findFriends}>Find friends</Button>
-    <Link to="/homepage/user">
-      <Button variant="primary">Back</Button>
-    </Link>
     {this.state.people.map(person => {
       return <ThumbnailProfile person={person} key={person._id}/>
     })}

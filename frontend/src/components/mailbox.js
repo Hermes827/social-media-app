@@ -1,6 +1,5 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
-import { Link } from "react-router-dom";
+// import Button from 'react-bootstrap/Button';
 
 class Mailbox extends React.Component {
 
@@ -8,9 +7,6 @@ class Mailbox extends React.Component {
   return (
     <div className="App">
         Mailbox
-        <Link to="/homepage/user">
-          <Button variant="primary">Back</Button>
-        </Link>
     </div>
   );
 }

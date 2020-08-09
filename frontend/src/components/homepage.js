@@ -24,23 +24,22 @@ class Homepage extends React.Component {
       <Link to="/homepage/search">
         <Button variant="primary" className="homepageButtons">Search</Button>
       </Link>
-      <Link to="/homepage/editprofile">
-        <Button variant="primary" className="homepageButtons">Edit profile</Button>
-      </Link>
-      <Link to="/homepage/settings">
-        <Button variant="primary" className="homepageButtons">Settings</Button>
-      </Link>
       <Link to={`/homepage/profile/`}>
         <Button variant="primary" className="homepageButtons">See Profile</Button>
       </Link>
       <Link to={`/homepage/mailbox/`}>
-        <Button variant="primary" className="homepageButtons">See Mailbox</Button>
+        <Button variant="primary" className="homepageButtons">Mailbox</Button>
+      </Link>
+      <Link to="/homepage/settings">
+        <Button variant="primary" className="homepageButtons">Settings</Button>
+      </Link>
+      <Link to="/homepage/user">
+        <Button variant="primary" className="homepageButtons">Home</Button>
       </Link>
         <Button variant="primary" className="homepageButtons" onClick={this.logout}>Log out</Button>
       {(this.props.history.location.pathname === "/homepage" || this.props.history.location.pathname === "/homepage/" )
         ? this.props.history.push('/homepage/user') : null}
       {this.hasToken()}
-      {console.log(this.props.currentUser)}
     </div>
   );
 }

@@ -6,12 +6,12 @@ class ThumbnailProfile extends React.Component {
 
   render(){
   return (
-    <div className="update">
+    <div className="thumbnailProfile">
     <h1>{this.props.person.name}</h1>
     <Link to={`/homepage/userprofile/${this.props.person._id}`}>
-    <img src={this.props.person.profileImg} width="100"/>
+    <img src={this.props.person.profileImg} width="100" alt="Profile"/>
     </Link>
-    <Button>Add friend</Button>
+    <Button className="thumbnailProfileButton">Add friend</Button>
     </div>
   );
 }
