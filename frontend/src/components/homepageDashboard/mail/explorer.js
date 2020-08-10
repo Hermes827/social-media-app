@@ -7,12 +7,13 @@ class Explorer extends React.Component {
   return (
     <div className="explorer">
         <h1>Messages</h1>
-        {
-          (this.props.info.mailBox !== undefined) ? this.props.info.mailBox.map(mail => {
-            return <MailThumbnail
-                    mail={mail}
-                    />
-          }) : null
+      {console.log(this.props.info)}
+      {
+        (this.props.info.mailBox !== undefined) ? this.props.info.mailBox.map(mail => {
+          return <MailThumbnail
+                  mail={mail}
+                  />
+        }) : null
       }
     </div>
   );

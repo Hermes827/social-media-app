@@ -1,6 +1,8 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import AlertDiv from './alertDiv'
+import { fetchUserData } from '../../actions/index.js';
+import { connect } from 'react-redux';
 
 class WriteMessageBox extends React.Component {
 
@@ -18,11 +20,15 @@ class WriteMessageBox extends React.Component {
       })
     }
 
+  componentDidMount(){
+    this.props.fetchUserData(localStorage.token)
+  }
+
     sendMessage = () => {
       var myHeaders = new Headers();
       myHeaders.append("x-access-token", localStorage.token);
       myHeaders.append("Content-Type", "application/json");
-      var raw = JSON.stringify({"message": this.state.message});
+      var raw = JSON.stringify({"message": [this.state.message, this.props.currentUser]});
       var requestOptions = {
         method: 'PUT',
         headers: myHeaders,
@@ -71,4 +77,13 @@ class WriteMessageBox extends React.Component {
 }
 }
 
-export default WriteMessageBox;
+
+const mapDispatchToProps = {
+  fetchUserData
+};
+
+const mapStateToProps = (state) => ({
+  currentUser: state.currentUser
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(WriteMessageBox);

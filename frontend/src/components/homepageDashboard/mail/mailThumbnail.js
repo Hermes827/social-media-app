@@ -8,7 +8,7 @@ class MailThumbnail extends React.Component {
   return (
     <div className="mailThumbnail" onClick={()=> this.props.getChosenMail(this.props.mail)}>
       name placeholder:
-      {this.props.mail.message}
+      {console.log(this.props.mail.message[0])}
     </div>
   );
 }
