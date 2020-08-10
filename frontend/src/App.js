@@ -1,16 +1,16 @@
 import React from 'react';
 import './App.css';
-import Login from './components/login.js'
-import Signup from './components/signup.js'
+import Login from './components/authentication/login.js'
+import Signup from './components/authentication/signup.js'
 import Welcomepage from './components/welcomepage.js'
-import Homepage from './components/homepage.js'
-import Userpage from './components/userpage.js'
-import Settings from './components/settings.js'
-import EditProfile from './components/editProfile.js'
-import Search from './components/search.js'
-import Profile from './components/profile.js'
-import UserProfile from './components/userProfile.js'
-import Mailbox from './components/mailbox.js'
+import Homepage from './components/homepageDashboard/homepage.js'
+import Userpage from './components/statusUpdates/userpage.js'
+import Settings from './components/homepageDashboard/settings.js'
+import EditProfile from './components/homepageDashboard/editProfile.js'
+import Search from './components/homepageDashboard/search.js'
+import Profile from './components/homepageDashboard/profile.js'
+import UserProfile from './components/universal/userProfile.js'
+import Mailbox from './components/homepageDashboard/mail/mailbox.js'
 import {
   BrowserRouter as Router,
   Switch,

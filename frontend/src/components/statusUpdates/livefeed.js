@@ -2,7 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Update from './update'
 import { connect } from 'react-redux';
-import { fetchUserData, getAllUpdates } from '../actions/index.js';
+import { fetchUserData, getAllUpdates } from '../../actions/index.js';
 
 class Livefeed extends React.Component {
 

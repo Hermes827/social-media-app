@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { compose } from 'redux'
-import { getAllUpdates, fetchUserData } from '../actions/index.js';
+import { getAllUpdates, fetchUserData } from '../../actions/index.js';
 import { Link } from "react-router-dom";
 
 class EditProfile extends React.Component {

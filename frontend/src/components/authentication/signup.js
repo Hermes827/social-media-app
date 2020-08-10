@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import {withRouter} from 'react-router';
 import { compose } from 'redux'
 import { connect } from 'react-redux';
-import { fetchUserData } from '../actions/index.js';
+import { fetchUserData } from '../../actions/index.js';
 
 class Signup extends React.Component {
 

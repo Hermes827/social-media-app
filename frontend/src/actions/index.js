@@ -10,6 +10,12 @@ export const getUpdates = (arg) => ({
   payload: { arg }
 });
 
+export const GET_CHOSENMAIL = 'GET_CHOSENMAIL';
+export const getChosenMail = (arg) => ({
+  type: GET_CHOSENMAIL,
+  payload: { arg }
+})
+
 export function fetchUserData(arg) {
   return function(dispatch, getState) {
     var myHeaders = new Headers();

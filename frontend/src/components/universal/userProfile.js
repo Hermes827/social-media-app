@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 // import ThumbnailProfile from './thumbnailProfile.js'
 import { withRouter } from 'react-router';
 import { compose } from 'redux'
-import WriteMessageBox from './writeMessageBox.js'
+import WriteMessageBox from '../sendMail/writeMessageBox.js'
 
 class UserProfile extends React.Component {
 
@@ -51,23 +51,6 @@ class UserProfile extends React.Component {
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
       }
-
-  sendMessage = () => {
-    // var myHeaders = new Headers();
-    // myHeaders.append("x-access-token", localStorage.token);
-    // myHeaders.append("Content-Type", "application/json");
-    // var raw = JSON.stringify({"message":"hello"});
-    // var requestOptions = {
-    //   method: 'PUT',
-    //   headers: myHeaders,
-    //   body: raw,
-    //   redirect: 'follow'
-    // fetch(`http://localhost:4000/users/sendmessage?userID=${this.props.match.params.id}`, requestOptions)
-    //   .then(response => response.json())
-    //   .then(result => console.log(result))
-    //   .catch(error => console.log('error', error));
-
-    };
 
     renderMessageBox = () => {
       if(this.state.sendMessage){

@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
-import { fetchUserData } from '../actions/index.js';
+import { fetchUserData } from '../../actions/index.js';
 import { Link } from "react-router-dom";
 
 class Profile extends React.Component {

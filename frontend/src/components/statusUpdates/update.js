@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
-import { getAllUpdates } from '../actions/index.js';
+import { getAllUpdates } from '../../actions/index.js';
 import Comment from './comment'
 
 class Update extends React.Component {

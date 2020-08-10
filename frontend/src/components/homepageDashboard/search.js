@@ -1,8 +1,8 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
-import ThumbnailProfile from './thumbnailProfile.js'
-import { fetchUserData } from '../actions/index.js';
+import ThumbnailProfile from '../universal/thumbnailProfile.js'
+import { fetchUserData } from '../../actions/index.js';
 
 class Search extends React.Component {
 
