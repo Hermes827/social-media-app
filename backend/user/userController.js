@@ -14,6 +14,7 @@ let multer = require('multer'),
 const { v4: uuidv4 } = require('uuid');
 uuidv4()
 const DIR = './public/';
+var Mail = require('../mail/mail');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -100,15 +101,34 @@ router.put('/uploadphoto', upload.single('profileImg'), VerifyToken, function (r
       });
     });
 
-    router.put('/sendmessage', function(req, res){
-      User.findByIdAndUpdate(req.query.userID, { $push: {"mailBox": req.body} }, function (err, user) {
-          if(err){
-            console.log(err)
-          } else {
-            console.log("Updated User : ", user);
-                res.status(200).send(user);
-            }
-          });
-    });
+router.put('/sendmessage', function(req, res){
+  Mail.create({
+          content: req.body.content,
+          date: req.body.date,
+          authorID: req.body.authorID,
+          authorName: req.body.authorName
+      },
+      function (err, mail) {
+          User.findByIdAndUpdate(req.query.userID, { $push: {"mailBox": mail} }, function (err, user) {
+              if(err){
+                console.log(err)
+              } else {
+                console.log("Updated User : ", user);
+                    res.status(200).send(user);
+                }
+              });
+      });
+});
+
+router.put('/deletemessages', function(req, res){
+  User.findByIdAndUpdate(req.query.userID, { $set: {"mailBox": []} }, function (err, user) {
+      if(err){
+        console.log(err)
+      } else {
+        console.log("Updated User : ", user);
+            res.status(200).send(user);
+        }
+      });
+});
 
 module.exports = router;

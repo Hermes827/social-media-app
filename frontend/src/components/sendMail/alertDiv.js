@@ -4,7 +4,7 @@ class AlertDiv extends React.Component {
 
   combinedFunction = () => {
     this.props.toggleAlert()
-    setTimeout(()=> this.props.toggle(), 350)
+    setTimeout(()=> this.props.toggle(), 400)
   }
 
   render(){

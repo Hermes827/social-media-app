@@ -180,7 +180,7 @@
   width: 60%;
   background-color: white;
   margin: 3em auto;
-  margin-left: 32em;
+  margin-left: 31em;
   overflow: scroll;
   position: absolute;
   border-radius: 1em;
@@ -195,6 +195,29 @@
   margin: 0.5em auto;
   /* background-color: grey; */
   border-radius: 0.5em;
+  overflow: hidden;
+}
+
+.mailThumbnailProfilePicture {
+  float: left;
+  margin-top: 0.5em;
+  margin-left: 0.3em;
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+  border-radius: 100%;
+}
+
+.mailThumbnailH5Name {
+  float: left;
+  margin-top: 0.1em;
+  margin-left: 1em;
+}
+
+.mailThumbnailH6Content {
+  float: left;
+  margin-left: -2.3em;
+  margin-top: 0.1em;
   overflow: hidden;
 }
 

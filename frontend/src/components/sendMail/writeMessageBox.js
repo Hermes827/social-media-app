@@ -28,7 +28,15 @@ class WriteMessageBox extends React.Component {
       var myHeaders = new Headers();
       myHeaders.append("x-access-token", localStorage.token);
       myHeaders.append("Content-Type", "application/json");
-      var raw = JSON.stringify({"message": [this.state.message, this.props.currentUser]});
+
+      var today = new Date();
+      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      var dateTime = date+' '+time;
+
+      var raw = JSON.stringify({"content": this.state.message, "date": dateTime,
+        "authorID": this.props.currentUser._id, "authorName": this.props.currentUser.name});
+
       var requestOptions = {
         method: 'PUT',
         headers: myHeaders,
@@ -70,13 +78,11 @@ class WriteMessageBox extends React.Component {
     <Button className="writeMessageBoxFormButton" onClick={this.props.toggle}>Cancel</Button>
     <Button className="writeMessageBoxFormButton" onClick={this.sendMessage}>Send</Button>
     </form>
-    {console.log(this.props)}
     {this.renderAlert()}
     </div>
   );
 }
 }
-
 
 const mapDispatchToProps = {
   fetchUserData

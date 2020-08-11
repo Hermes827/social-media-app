@@ -22,4 +22,7 @@ app.use('/updates', UpdateController);
 var CommentController = require('./comment/commentController');
 app.use('/comments', CommentController);
 
+var MailController = require('./mail/mailController');
+app.use('/mail', MailController);
+
 module.exports = app;

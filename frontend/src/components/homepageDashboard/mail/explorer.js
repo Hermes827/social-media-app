@@ -12,6 +12,7 @@ class Explorer extends React.Component {
         (this.props.info.mailBox !== undefined) ? this.props.info.mailBox.map(mail => {
           return <MailThumbnail
                   mail={mail}
+                  key={mail._id}
                   />
         }) : null
       }

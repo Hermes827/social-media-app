@@ -6,7 +6,8 @@ class ViewMail extends React.Component {
   render(){
   return (
     <div className="viewMail">
-        {this.props.chosenMail.message}
+        {this.props.chosenMail.content}
+        {console.log(this.props)}
     </div>
   );
 }
