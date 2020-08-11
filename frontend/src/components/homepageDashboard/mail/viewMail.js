@@ -3,11 +3,19 @@ import { connect } from 'react-redux';
 
 class ViewMail extends React.Component {
 
+  showContent(){
+    if(this.props.chosenMail.content === undefined && this.props.mail.length !== 0){
+      return this.props.mail[0].content
+    } else {
+      return this.props.chosenMail.content
+    }
+  }
+
   render(){
   return (
     <div className="viewMail">
-        {this.props.chosenMail.content}
-        {console.log(this.props)}
+        {this.showContent()}
+
     </div>
   );
 }

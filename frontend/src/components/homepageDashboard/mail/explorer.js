@@ -7,9 +7,8 @@ class Explorer extends React.Component {
   return (
     <div className="explorer">
         <h1>Messages</h1>
-      {console.log(this.props.info)}
       {
-        (this.props.info.mailBox !== undefined) ? this.props.info.mailBox.map(mail => {
+        (this.props.mail !== undefined) ? this.props.mail.map(mail => {
           return <MailThumbnail
                   mail={mail}
                   key={mail._id}

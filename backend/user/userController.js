@@ -106,10 +106,12 @@ router.put('/sendmessage', function(req, res){
           content: req.body.content,
           date: req.body.date,
           authorID: req.body.authorID,
-          authorName: req.body.authorName
+          authorName: req.body.authorName,
+          receiverID: req.query.userID
       },
       function (err, mail) {
-          User.findByIdAndUpdate(req.query.userID, { $push: {"mailBox": mail} }, function (err, user) {
+        console.log("this is: " + mail._id)
+          User.findByIdAndUpdate(req.query.userID, { $push: {"mailBox": mail._id} }, function (err, user) {
               if(err){
                 console.log(err)
               } else {

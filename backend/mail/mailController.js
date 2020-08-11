@@ -32,12 +32,13 @@ router.use(cors());
 // });
 // });
 //
-// router.get('/',  function (req, res) {
-//     Mail.find({"updateID": req.query.updateID}, function (err, mails) {
-//         if (err) return res.status(500).send("There was a problem finding the users.");
-//         res.status(200).send(mails);
-//     });
-// });
+router.get('/',  function (req, res) {
+    Mail.findById(req.query.mailID, function (err, mail) {
+        if (err) return res.status(500).send("There was a problem finding the users.");
+        res.status(200).send(mail);
+    });
+});
+
 //
 // router.delete('/', function (req, res) {
 //     Mail.remove({}, function (err, mails) {

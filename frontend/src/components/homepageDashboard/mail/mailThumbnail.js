@@ -20,7 +20,7 @@ class MailThumbnail extends React.Component {
     fetch(`http://localhost:4000/users/find?userID=${this.props.mail.authorID}`, requestOptions)
       .then(response => response.json())
       .then(result => {
-        console.log(result)
+        // console.log(result)
         this.setState({
           thumbnailImg: result.profileImg
         })
@@ -46,7 +46,6 @@ class MailThumbnail extends React.Component {
       />
     <h5 className="mailThumbnailH5Name">{this.props.mail.authorName}</h5><br/>
     <h6 className="mailThumbnailH6Content">{this.makeBlurb(this.props.mail.content) + '...'}</h6>
-      {console.log(this.props.mail)}
     </div>
   );
 }

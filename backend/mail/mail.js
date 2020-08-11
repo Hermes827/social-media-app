@@ -3,7 +3,8 @@ var MailSchema = new mongoose.Schema({
   content: String,
   date: String,
   authorID: String,
-  authorName: String
+  authorName: String,
+  receiverID: String
 });
 mongoose.model('Mail', MailSchema);
 
