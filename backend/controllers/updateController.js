@@ -3,12 +3,12 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
-var Update = require('./update');
+var Update = require('../models/update');
 var VerifyToken = require('../auth/verifyToken');
 var jwt = require('jsonwebtoken');
 var config = require('../config');
-var cors = require('cors')
-router.use(cors());
+// var cors = require('cors')
+// router.use(cors());
 var Comment = require('../comment/comment');
 
 router.post('/', VerifyToken, function (req, res) {
@@ -25,6 +25,27 @@ router.post('/', VerifyToken, function (req, res) {
             res.status(200).send(update);
         });
 });
+
+//////////////////////////////////////////////////////////////////
+
+exports.createUpdate = async function (req, res, next) {
+
+  Update.create({
+          title: req.body.title,
+          content: req.body.content,
+          date: req.body.date,
+          authorID: req.body.authorID,
+          authorName: req.body.authorName
+      },
+      function (err, update) {
+          if (err) return res.status(500).send("There was a problem adding the information to the database.");
+          res.status(200).send(update);
+      });
+
+}
+
+//////////////////////////////////////////////////////////////////
+
 
 router.get('/', function (req, res) {
     Update.find({}, function (err, updates) {
