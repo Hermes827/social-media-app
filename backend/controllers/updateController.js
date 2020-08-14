@@ -11,38 +11,73 @@ var config = require('../config');
 // router.use(cors());
 var Comment = require('../comment/comment');
 
-router.post('/', VerifyToken, function (req, res) {
-
-    Update.create({
-            title: req.body.title,
-            content: req.body.content,
-            date: req.body.date,
-            authorID: req.body.authorID,
-            authorName: req.body.authorName
-        },
-        function (err, update) {
-            if (err) return res.status(500).send("There was a problem adding the information to the database.");
-            res.status(200).send(update);
-        });
-});
+// router.post('/', VerifyToken, function (req, res) {
+//
+//     Update.create({
+//             title: req.body.title,
+//             content: req.body.content,
+//             date: req.body.date,
+//             authorID: req.body.authorID,
+//             authorName: req.body.authorName
+//         },
+//         function (err, update) {
+//             if (err) return res.status(500).send("There was a problem adding the information to the database.");
+//             res.status(200).send(update);
+//         });
+// });
 
 //////////////////////////////////////////////////////////////////
 
-exports.createUpdate = async function (req, res, next) {
+// exports.createUpdate = async function (req, res, next) {
+//
+//   console.log("hello")
+//
+//   // Update.create({
+//   //         title: req.body.title,
+//   //         content: req.body.content,
+//   //         date: req.body.date,
+//   //         authorID: req.body.authorID,
+//   //         authorName: req.body.authorName
+//   //     },
+//   //     function (err, update) {
+//   //         if (err) return res.status(500).send("There was a problem adding the information to the database.");
+//   //         res.status(200).send(update);
+//   //     });
+//
+// }
 
-  Update.create({
-          title: req.body.title,
-          content: req.body.content,
-          date: req.body.date,
-          authorID: req.body.authorID,
-          authorName: req.body.authorName
-      },
-      function (err, update) {
-          if (err) return res.status(500).send("There was a problem adding the information to the database.");
-          res.status(200).send(update);
-      });
+// exports.getUsers = async function (req, res, next) {
+//     // Validate request parameters, queries using express-validator
+//
+//     var page = req.params.page ? req.params.page : 1;
+//     var limit = req.params.limit ? req.params.limit : 10;
+//     try {
+//         var users = await UserService.getUsers({}, page, limit)
+//         return res.status(200).json({ status: 200, data: users, message: "Succesfully Users Retrieved" });
+//     } catch (e) {
+//         return res.status(400).json({ status: 400, message: e.message });
+//     }
+// }
 
+exports.getUpdates = async function (req, res, next) {
+  // console.log("hello")
+//     var updates = await Update.find({}, page, limit)
+//     try {
+//     return res.status(200).json({ status: 200, data: updates, message: "Succesfully Users Retrieved" });
+// } catch (e) {
+//     return res.status(400).json({ status: 400, message: e.message });
+// }
+
+var updates = await Update.find({}, function (err, updates) {
+    if (err) return res.status(500).send("There was a problem finding the users.");
+    res.status(200).send(updates);
+});
 }
+
+// var updates = await Update.find({}, function (err, updates) {
+//     if (err) return res.status(500).send("There was a problem finding the users.");
+//     res.status(200).send(updates);
+// });
 
 //////////////////////////////////////////////////////////////////
 
@@ -84,4 +119,4 @@ router.delete('/:id', VerifyToken, function (req, res) {
 });
 })
 
-module.exports = router;
+// module.exports = router;
