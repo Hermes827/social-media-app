@@ -25,7 +25,7 @@ export function fetchUserData(arg) {
       headers: myHeaders,
       redirect: 'follow'
     };
-    fetch("http://localhost:4000/api/auth/me", requestOptions)
+    fetch("http://localhost:4000/api/auth/info", requestOptions)
       .then(response => response.json())
       .then(json => {
         dispatch(getData(json))
@@ -42,6 +42,7 @@ export function getAllUpdates(arg) {
     fetch("http://localhost:4000/updates", requestOptions)
     .then(response => response.json())
     .then(json => {
+      console.log(json)
       dispatch(getUpdates(json.reverse()))
     })
   };
