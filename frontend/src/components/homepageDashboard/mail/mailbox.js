@@ -26,7 +26,7 @@ class Mailbox extends React.Component {
 
   getMessages(){
     let arr = []
-      this.props.currentUser.mailBox.map(messageID => {
+      this.props.currentUser.mailBox.forEach(messageID => {
         var requestOptions = {
               method: 'GET',
               redirect: 'follow'

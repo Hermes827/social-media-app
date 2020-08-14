@@ -1,16 +1,6 @@
-var express = require('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
-router.use(bodyParser.urlencoded({ extended: true }));
-router.use(bodyParser.json());
-var Comment = require('./comment');
-var VerifyToken = require('../auth/verifyToken');
-var jwt = require('jsonwebtoken');
-var config = require('../config');
-var cors = require('cors')
-router.use(cors());
+var Comment = require('../models/comment');
 
-router.post('/', VerifyToken, function (req, res){
+exports.createComment = async function (req, res){
     Comment.create({
             userName: req.body.userName,
             content: req.body.content,
@@ -23,38 +13,36 @@ router.post('/', VerifyToken, function (req, res){
             if (err) return res.status(500).send("There was a problem adding the information to the database.");
             res.status(200).send(comment);
         });
-});
+};
 
-router.get('/:id',  function (req, res) {
+exports.findComment = async  function (req, res) {
   Comment.findById(req.params.id, function (err, comment) {
         if (err) return res.status(500).send("There was a problem finding the user.");
         if (!comment) return res.status(404).send("No user found.");
         res.status(200).send(comment);
 });
-});
+};
 
-router.get('/',  function (req, res) {
+exports.findUpdateComments = async function (req, res) {
     Comment.find({"updateID": req.query.updateID}, function (err, comments) {
         if (err) return res.status(500).send("There was a problem finding the users.");
         res.status(200).send(comments);
     });
-});
+};
 
-router.delete('/', function (req, res) {
+exports.deleteAllComments = async function (req, res) {
     Comment.remove({}, function (err, comments) {
         if (err) return res.status(500).send("There was a problem finding the users.");
         res.status(200).send(comments);
         console.log(comments)
     });
-});
+};
 
-router.delete('/:id', VerifyToken, function (req, res) {
+exports.deleteComment = async function (req, res) {
   Comment.findById(req.params.id, function (err, comment) {
         if (err) return res.status(500).send("There was a problem finding the user.");
         if (!comment) return res.status(404).send("No user found.");
         if(comment.authorID === req.userId){comment.remove({})}
         res.status(200).send(comment);
 });
-})
-
-module.exports = router;
+}

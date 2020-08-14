@@ -1,28 +1,44 @@
 var express = require('express');
+var app = express();
 var db = require('./db');
-var cors = require('cors')
 var bodyParser = require('body-parser')
-const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: false
+  extended: false
 }));
+var cors = require('cors')
 app.use(cors());
 app.use('/public', express.static('public'));
 
-var UserController = require('./user/userController');
-app.use('/users', UserController);
+var UpdateRouter = require('./routes/updateRoutes');
+app.use('/updates', UpdateRouter);
 
-var AuthController = require('./auth/authController');
-app.use('/api/auth', AuthController);
+var UserRouter = require('./routes/userRoutes');
+app.use('/users', UserRouter);
 
-var UpdateController = require('./statusUpdate/updateController');
-app.use('/updates', UpdateController);
+var AuthRouter = require('./routes/authRoutes');
+app.use('/api/auth', AuthRouter);
 
-var CommentController = require('./comment/commentController');
-app.use('/comments', CommentController);
+var CommentRouter = require('./routes/commentRoutes');
+app.use('/comments', CommentRouter);
 
-var MailController = require('./mail/mailController');
-app.use('/mail', MailController);
+var MailRouter = require('./routes/mailRoutes');
+app.use('/mail', MailRouter);
 
-module.exports = app;
+var port = process.env.PORT || 4000;
+
+app.use((req, res, next) => {
+    setImmediate(() => {
+        next(new Error('Something went wrong'));
+    });
+});
+
+app.use(function (err, req, res, next) {
+    console.error(err.message);
+    if (!err.statusCode) err.statusCode = 500;
+    res.status(err.statusCode).send(err.message);
+});
+
+var server = app.listen(port, function() {
+  console.log('Express server listening on port ' + port);
+});

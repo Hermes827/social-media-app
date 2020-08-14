@@ -1,14 +1,11 @@
-var express = require('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
-router.use(bodyParser.urlencoded({ extended: true }));
-router.use(bodyParser.json());
-var Mail = require('./mail');
-var VerifyToken = require('../auth/verifyToken');
-var jwt = require('jsonwebtoken');
-var config = require('../config');
-var cors = require('cors')
-router.use(cors());
+var Mail = require('../models/mail');
+
+exports.findUserMail = async function (req, res) {
+    Mail.findById(req.query.mailID, function (err, mail) {
+        if (err) return res.status(500).send("There was a problem finding the users.");
+        res.status(200).send(mail);
+    });
+};
 
 // router.post('/', VerifyToken, function (req, res){
 //     Mail.create({
@@ -23,7 +20,7 @@ router.use(cors());
 //             res.status(200).send(mail);
 //         });
 // });
-
+//
 // router.get('/:id',  function (req, res) {
 //   Mail.findById(req.params.id, function (err, mail) {
 //         if (err) return res.status(500).send("There was a problem finding the user.");
@@ -31,14 +28,6 @@ router.use(cors());
 //         res.status(200).send(mail);
 // });
 // });
-//
-router.get('/',  function (req, res) {
-    Mail.findById(req.query.mailID, function (err, mail) {
-        if (err) return res.status(500).send("There was a problem finding the users.");
-        res.status(200).send(mail);
-    });
-});
-
 //
 // router.delete('/', function (req, res) {
 //     Mail.remove({}, function (err, mails) {
@@ -56,5 +45,3 @@ router.get('/',  function (req, res) {
 //         res.status(200).send(mail);
 // });
 // })
-
-module.exports = router;

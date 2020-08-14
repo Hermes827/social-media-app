@@ -42,7 +42,7 @@ getComments(){
   redirect: 'follow'
   };
 
-  fetch(`http://localhost:4000/comments/?updateID=${this.props.info._id}`, requestOptions)
+  fetch(`http://localhost:4000/comments/update/?updateID=${this.props.info._id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
       this.setState({
